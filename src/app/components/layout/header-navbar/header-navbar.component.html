@@ -1,0 +1,97 @@
+<div
+  class="d-flex justify-content-lg-end justify-content-sm-end header-section"
+>
+  <nav class="navbar navbar-expand-lg navbar-light mt-4">
+    <div class="container-fluid">
+      <div class="d-flex mx-3">
+        <a id="sidebar-collapse" class="btn bg-white border-0"
+          ><i class="fal fa-bars"></i>
+        </a>
+        <h3>Gestion des loyers</h3>
+      </div>
+
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">-</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">-</a>
+                    </li> -->
+        </ul>
+        <div id="#user-card" class="card border-0 me-5 main-card">
+          <div *ngIf="user.existedUser" class="card-body">
+            <h6 class="mainText text-capitalize">
+              <a [routerLink]="['/profile']" class="goback-link">
+                {{ user.existedUser.nom }} {{ user.existedUser.prenom }}
+              </a>
+              <span class="text-secondary"> • </span>
+              <span class="main-muted-text">
+                {{ user.existedUser.userMatricul }}
+              </span>
+            </h6>
+            <div
+              *ngFor="let userR of user.existedUser.userRoles; let i = index"
+            >
+              <span
+                class="badge user-admin-title"
+                *ngIf="!userRole[i].deleted"
+                >{{ userRole[i].roleName }}</span
+              >
+            </div>
+          </div>
+          <div *ngIf="!user.existedUser" class="card-body">
+            <h6 class="mainText">Vous devez se connecter.</h6>
+          </div>
+        </div>
+        <a class="btn dark-btn mx-2" (click)="doDarkMode()" title="Mode sombre"
+          ><i class="fal fa-moon"></i
+        ></a>
+        <a
+          [routerLink]="['/notification']"
+          routerLinkActive="router-link-active"
+          class="btn main-btn"
+          title="Notifications"
+        >
+          <i class="fal fa-bell"></i>
+          {{ notifCount >= 0 ? notifCount : 0 }}
+        </a>
+        <a
+          [routerLink]="['/profile']"
+          routerLinkActive="router-link-active"
+          class="btn main-btn mx-2"
+          title="Profile"
+        >
+          <i class="fal fa-user"></i>
+        </a>
+        <a
+          class="btn danger-btn me-2"
+          (click)="openConfirmationModal()"
+          title="Déconnexion"
+          ><i class="far fa-sign-out"></i
+        ></a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<app-confirmation-modal [closeBtn]="true" [id]="id">
+  <h3 class="main-title">Êtes-vous sûr de vouloir se déconnecter ?</h3>
+  <div class="d-inline-flex justify-content-start mt-5">
+    <a
+      class="btn btn-lg px-lg-4 danger-btn me-2"
+      (click)="logout(); closeConfirmationModal()"
+      >Oui</a
+    >
+    <a class="btn btn-lg px-lg-4 main-btn" (click)="closeConfirmationModal()"
+      >Non</a
+    >
+  </div>
+</app-confirmation-modal>

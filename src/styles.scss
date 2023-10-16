@@ -1,0 +1,148 @@
+@use 'assets/style/helpers' as *;
+@use 'assets/style/components' as *;
+
+/* Global styles */
+
+// Selection
+::selection {
+  background-color: color(main-color);
+  color: #f5f5f5;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: color(body-color) !important;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: color(main-color) !important;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: color(dark) !important;
+}
+
+::placeholder {
+  color: rgb(213, 213, 213) !important;
+  font-size: 12px;
+}
+
+html {
+  scroll-behavior: smooth !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: color(body-color) !important;
+  color: color(dark) !important;
+  overflow-x: hidden;
+}
+
+a {
+  cursor: pointer !important;
+}
+
+// Global font weights
+.bold-font {
+  font-weight: weight(bold);
+}
+
+// Active link setup
+.router-link-active {
+  @extend .second-btn;
+
+  &:hover {
+    background: color(dark) !important;
+    border: 0.1em solid color(dark) !important;
+  }
+}
+
+// Dark mode setup
+.darkmode-activated {
+  background-color: color(dark-body) !important;
+  color: color(body-color) !important;
+  #sidebar,
+  .navbar,
+  .bg-white,
+  .main-card {
+    background-color: #535353 !important;
+    color: color(light);
+    filter: brightness(90%);
+  }
+  .logo {
+    display: none;
+  }
+  .main-muted-text,
+  th,
+  td,
+  h3,
+  .main-title {
+    color: color(light) !important;
+  }
+  input[type='text'],
+  textarea {
+    color: color(light);
+    background-color: color(dark-body);
+    border-color: color(dark);
+  }
+  .main-btn {
+    background-color: color(dark-body) !important;
+    color: color(body-color) !important;
+    border-color: color(dark) !important;
+  }
+  .sub-menu-btn {
+    color: color(body-color) !important;
+    &::before {
+      content: '❯';
+      margin-right: 5px;
+      color: color(dark-body) !important;
+    }
+  }
+  .count-number {
+    color: color(main-color) !important;
+    font-weight: bold;
+  }
+  .modal-content {
+    background-color: color(dark-body) !important;
+    color: color(light) !important;
+  }
+}
+
+// Setup pagination
+.ngx-pagination {
+  width: 100% !important;
+  display: flex;
+  padding-left: 0px !important;
+  & .current,
+  .btn-info {
+    @extend .main-btn;
+    background-color: color(main-color) !important;
+    &:hover {
+      @extend .main-btn;
+    }
+  }
+
+  & a button {
+    @extend .main-btn;
+  }
+}
+
+// Checkbox style
+.form-check-input:checked {
+  background-color: #f9a11e !important;
+  border-color: #f9a11e !important;
+}

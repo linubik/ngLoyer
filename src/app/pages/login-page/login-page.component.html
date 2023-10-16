@@ -1,0 +1,114 @@
+<app-main-modal [closeBtn]="false">
+  <div
+    class="
+      login-content
+      d-flex
+      align-items-center
+      justify-content-center
+      flex-column
+    "
+  >
+    <div class="w-100 d-flex justify-content-center">
+      <div *ngIf="hasError" class="error-alert p-2 my-2">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div>
+      <img
+        src="../../../assets/images/logo/Attawfiq.jpg"
+        alt="Attawfiq Logo"
+        width="auto"
+        draggable="false"
+        loading="lazy"
+        class="mr-3 img-thumbnail border-0 logo"
+      />
+    </div>
+    <h4>Connexion au compte</h4>
+    <p>Merci de se connecter pour accéder à l'application.</p>
+
+    <form
+      [formGroup]="loginForm"
+      class="mt-4 d-flex flex-column"
+      (ngSubmit)="login()"
+    >
+      <div *ngIf="!matricule" class="form-group">
+        <label for="">Matricule <span class="danger-txt">*</span></label>
+        <input
+          type="text"
+          placeholder="Matricule"
+          class="form-control rounded-pill"
+          formControlName="Matricule"
+        />
+      </div>
+      <div class="" *ngIf="checkInputsValidation(Matricule)">
+        <p class="danger-txt" *ngIf="Matricule?.errors?.required">
+          Veuillez remplir ce champ
+        </p>
+      </div>
+
+      <input
+        *ngIf="matricule"
+        type="hidden"
+        [(ngModel)]="matricule"
+        class="form-control rounded-pill"
+        formControlName="Matricule"
+      />
+
+      <div *ngIf="matricule" class="d-flex align-items-baseline gap-2">
+        <div>
+          <p>
+            Matricule
+            <span class="h4">
+              <strong>
+                {{ matricule }}
+              </strong>
+            </span>
+          </p>
+        </div>
+        <div>
+          <a (click)="removeUser()" class="btn btn-sm danger-btn"
+            ><i class="far fa-trash"></i
+          ></a>
+        </div>
+      </div>
+
+      <div class="form-group mb-2">
+        <label>Mot de passe <span class="danger-txt">*</span></label>
+        <div class="input-group">
+          <input
+            [type]="!showPass ? 'password' : 'text'"
+            type="password"
+            placeholder="Mot de passe"
+            class="form-control rounded-pill"
+            formControlName="Password"
+          />
+          <a
+            (click)="showPassword()"
+            class="main-btn p-2 ms-2"
+            aria-label="Voir le mot de passe"
+          >
+            <i [class]="showPass ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </a>
+        </div>
+      </div>
+      <div class="" *ngIf="checkInputsValidation(Password)">
+        <p class="danger-txt" *ngIf="Password?.errors?.required">
+          Veuillez remplir ce champ
+        </p>
+        <p class="danger-txt" *ngIf="Password?.errors?.minlength">
+          Le mot de passe doit contenir au minimum 8 caractères
+        </p>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="btn second-btn mt-3"
+        (click)="login()"
+      >
+        Se connecter <i class="fal fa-sign-in-alt"></i>
+      </button>
+    </form>
+  </div>
+</app-main-modal>

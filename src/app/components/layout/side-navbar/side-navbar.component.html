@@ -1,0 +1,256 @@
+<!-- Vertical navbar -->
+<div class="vertical-nav" id="sidebar">
+  <div class="px-3 mt-3">
+    <a id="sidebar-collapse-mobile" class="btn bg-white border-0">
+      <i class="far fa-chevron-left"></i>
+    </a>
+    <div class="d-flex justify-content-center w-100">
+      <img
+        src="../../../assets/images/logo/Attawfiq.jpg"
+        alt="Attawfiq Logo"
+        width="150px"
+        draggable="false"
+        loading="lazy"
+        class="mr-3 img-thumbnail border-0 logo"
+      />
+    </div>
+    <!-- <div id="user-card-mobile" class="card border-0 mb-0 mt-3 main-card">
+          <div class="card-body">
+              <h6 class="mainText">
+                  Ahmad Alaoui
+              </h6>
+              <span class="badge danger-btn">
+                  Administrateur
+              </span>
+          </div>
+      </div> -->
+  </div>
+
+  <div class="mt-3">
+    <div
+      class="
+        main-card main-light-card-bg
+        d-flex
+        justify-content-center
+        align-items-center
+        flex-row
+        py-2
+        px-3
+        mx-3
+        mb-4
+      "
+    >
+      <h5 class="main-txt">{{ monthName }} {{ dateNextCloture?.annee }}</h5>
+    </div>
+    <ul class="nav flex-column p-4">
+      <li class="nav-item">
+        <a
+          [routerLink]="['']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link main-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="fal fa-home"></i> Tableau de bord
+        </a>
+      </li>
+
+      <li class="nav-item my-4" *ngIf="!isAdmin">
+        <a
+          href="#"
+          id="lieux-link"
+          class="nav-link main-btn"
+          (click)="showSubMenu('entite')"
+        >
+          <span>
+            <i class="fal fa-building"></i>&nbsp;&nbsp;Entités organisat..
+          </span>
+        </a>
+        <ul class="sub-menu list-unstyled" id="entite">
+          <li *ngIf="!isDC && !isDAJC">
+            <a
+              [routerLink]="['/lieux']"
+              class="nav-link sub-menu-btn"
+              (click)="putActiveLink('lieux')"
+            >
+              Ajouter une entité organisationnelle
+            </a>
+          </li>
+          <li>
+            <a
+              [routerLink]="['/lieux/list']"
+              class="nav-link sub-menu-btn"
+              (click)="putActiveLink('lieux')"
+            >
+              Liste des entités organisationnelles
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item" *ngIf="!isAdmin">
+        <a
+          href="#"
+          id="foncier-link"
+          class="nav-link main-btn"
+          (click)="showSubMenu('lieux')"
+        >
+          <span> <i class="fas fa-hotel"></i>&nbsp;&nbsp;Locaux </span>
+        </a>
+        <ul class="sub-menu list-unstyled" id="lieux">
+          <li *ngIf="!isDC && !isDAJC">
+            <a
+              [routerLink]="['/foncier']"
+              class="nav-link sub-menu-btn"
+              (click)="putActiveLink('foncier')"
+            >
+              Ajouter un local
+            </a>
+          </li>
+          <li>
+            <a
+              [routerLink]="['/foncier/list']"
+              class="nav-link sub-menu-btn"
+              (click)="putActiveLink('foncier')"
+            >
+              Liste des locaux
+            </a>
+          </li>
+          <!-- <li>
+                      <a [routerLink]="['/foncier/list']" class="nav-link sub-menu-btn">
+                          Ajouter un propriétaire
+                      </a>
+                  </li>
+                  <li>
+                      <a [routerLink]="['/foncier/list']" class="nav-link sub-menu-btn">
+                          Ajouter un contrat
+                      </a>
+                  </li> -->
+        </ul>
+      </li>
+
+      <li class="nav-item my-4" *ngIf="!isAdmin">
+        <a
+          [routerLink]="['/contrat/list-global/list']"
+          routerLinkActive="router-link-active"
+          class="nav-link main-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="fal fa-file-signature"></i>&nbsp;&nbsp;Liste des contrats
+        </a>
+        <!-- <ul class="sub-menu list-unstyled" id="contrat">
+                  <li>
+                      <a [routerLink]="['/contrat/list']" class="nav-link sub-menu-btn">
+                          List des contrats
+                      </a>
+                  </li>
+
+              </ul> -->
+      </li>
+
+      <li class="nav-item" *ngIf="!isAdmin">
+        <a
+          href="#"
+          id="proprietaire-link"
+          class="nav-link main-btn"
+          (click)="showSubMenu('proprietaire')"
+        >
+          <i class="fal fa-users"></i>&nbsp;Propriétaires
+        </a>
+        <ul class="sub-menu list-unstyled" id="proprietaire">
+          <li *ngIf="!isDC && !isDAJC" class="mt-2">
+            <a
+              [routerLink]="['/proprietaire/add']"
+              class="nav-link sub-menu-btn"
+              (click)="putActiveLink('proprietaire')"
+            >
+              Ajouter un propriétaire
+            </a>
+          </li>
+          <li>
+            <a
+              [routerLink]="['/proprietaire/list-global/list']"
+              class="nav-link sub-menu-btn"
+              (click)="putActiveLink('proprietaire')"
+            >
+              Liste des propriétaires
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item my-4" *ngIf="!isAdmin">
+        <a
+          [routerLink]="['/reportings']"
+          routerLinkActive="router-link-active"
+          class="nav-link main-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="far fa-file-chart-line"></i>&nbsp;&nbsp;Reportings
+        </a>
+      </li>
+
+      <li class="nav-item" *ngIf="isDC">
+        <a
+          [routerLink]="['/situation']"
+          routerLinkActive="router-link-active"
+          class="nav-link success-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="fal fa-copy"></i>&nbsp;&nbsp;Situation de clôture
+        </a>
+      </li>
+
+      <li class="nav-item my-4" *ngIf="isDC">
+        <a
+          [routerLink]="['/files']"
+          routerLinkActive="router-link-active"
+          class="nav-link success-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="far fa-lock"></i>&nbsp;&nbsp;Clôture et écritures
+        </a>
+      </li>
+
+      <!-- <li *ngIf="isDC" class="nav-item">
+              <a [routerLink]="['/files']" routerLinkActive="router-link-active" class="nav-link success-btn">
+                  <i class="far fa-file-export"></i>&nbsp;&nbsp;Ecritures
+              </a>
+          </li> -->
+
+      <li class="nav-item" *ngIf="isDC">
+        <a
+          [routerLink]="['/declaration-annuelle']"
+          routerLinkActive="router-link-active"
+          class="nav-link success-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="far fa-file-export"></i>&nbsp;&nbsp;Déclaration annuelle
+        </a>
+      </li>
+
+      <li *ngIf="isAdmin" class="nav-item my-4">
+        <a
+          [routerLink]="['/admin']"
+          routerLinkActive="router-link-active"
+          class="nav-link danger-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="far fa-user-shield"></i>&nbsp;&nbsp;Administration
+        </a>
+      </li>
+
+      <li *ngIf="isAdmin" class="nav-item">
+        <a
+          [routerLink]="['/signaletique']"
+          routerLinkActive="router-link-active"
+          class="nav-link main-btn"
+          (click)="putActiveLink('-')"
+        >
+          <i class="far fa-file-alt"></i>&nbsp;&nbsp;Signalétique AMF
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- End vertical navbar -->
